@@ -11,16 +11,16 @@ pipeline {
 		stage("Build"){
             steps {
                 echo "Building the image"
-				sh "docker build -t cicd ."
+				sh "docker build -t my-note-app ."
             }
         }
 		stage("Push to Docker Hub"){
             steps {
                 echo "Pushing the image to docker hub"
 				withCredentials([usernamePassword(credentialsId:"DokerHubCredential123",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-				sh "docker tag cicd ${env.dockerHubUser}/cicd:latest"
+				sh "docker tag my-note-app ${env.dockerHubUser}/my-note-app:latest"
 				sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-				sh "docker push ${env.dockerHubUser}/cicd:latest"
+				sh "docker push ${env.dockerHubUser}/my-note-app:latest"
 				}
             }
         }
