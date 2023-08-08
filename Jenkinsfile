@@ -17,7 +17,7 @@ pipeline {
 		stage("Push to Docker Hub"){
             steps {
                 echo "Pushing the image to docker hub"
-				withCredentials([usernamePassword(credentialsId:"DokerHubCredential",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
+				withCredentials([usernamePassword(credentialsId:"DokerHubCredential123",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
 				sh "docker tag cicd ${env.dockerHubUser}/cicd:latest"
 				sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
 				sh "docker push ${env.dockerHubUser}/cicd:latest"
